@@ -8,9 +8,9 @@ class Config
 {
     protected $config;
 
-    public function __construct()
+    public function __construct(array $config = [])
     {
-        $this->config = $this->getConfig();
+        $this->config = empty($config) ? $this->getConfig() : $config;
 
         return $this;
     }
@@ -42,9 +42,7 @@ class Config
          * So, we can chain access. For example: $config->database->host
          */
         if (is_array($value)) {
-            $this->config = $value;
-
-            return $this;
+            return new static($value);
         }
 
         return $value;
