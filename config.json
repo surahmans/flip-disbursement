@@ -1,12 +1,13 @@
 {
-   "database":{
-      "host":"127.0.0.1",
-      "name":"flip",
-      "user":"root",
-      "pass":"root"
-   },
-   "flip":{
-      "url":"https://nextar.flip.id",
-      "secret_key":"HyzioY7LP6ZoO7nTYKbG8O4ISkyWnX1JvAEVAhtWKZumooCzqp41"
-   }
+    "database": {
+        "driver": "mysql",
+        "host": "127.0.0.1",
+        "name": "flip",
+        "user": "root",
+        "pass": "root"
+    },
+    "flip": {
+        "url": "https://nextar.flip.id",
+        "secret_key": "HyzioY7LP6ZoO7nTYKbG8O4ISkyWnX1JvAEVAhtWKZumooCzqp41"
+    }
 }
