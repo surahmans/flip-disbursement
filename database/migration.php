@@ -4,6 +4,7 @@ require_once  __DIR__ . '/../bootstrap/app.php';
 
 try {
     $query = $app->conn->prepare("
+        SET FOREIGN_KEY_CHECKS = 0;
         DROP TABLE IF EXISTS `disbursements`;
         CREATE TABLE `disbursements` (
             `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -33,6 +34,7 @@ try {
             CONSTRAINT `disbursement_id` FOREIGN KEY (`disbursement_id`) REFERENCES `disbursements` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
         )
         COLLATE='latin1_swedish_ci';
+        SET FOREIGN_KEY_CHECKS = 1;
     ");
 
     $query->execute();
