@@ -55,10 +55,10 @@ class Config
 
     private function getConfigFile()
     {
-        $filename = 'config.json';
+        $filename = __DIR__ . '/../config.json';
 
         if (!file_exists($filename)) {
-            throw new Exception('Config file does not exist');
+            throw new Exception('Config file does not exist at '. $filename);
         }
 
         return file_get_contents($filename);
