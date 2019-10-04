@@ -11,17 +11,17 @@ trait ValidatorTrait
     /**
      * Check if input is valid
      *
-     * @param string $param Key in parameters property
+     * @param string $ruleKey Key for rules property
      * @param string $input Input value
      * @return boolean
      */
-    public function isValidInput(string $param, string $input)
+    public function isValidInput(string $ruleKey, string $input)
     {
         if (! property_exists($this, 'rules')) {
             throw new Exception('rules property not exist in class: '. get_class($this));
         }
 
-        $rule = $this->rules[$param] ?? null;
+        $rule = $this->rules[$ruleKey] ?? null;
 
         /**
          * If there is no rules definition, just return true
@@ -39,7 +39,7 @@ trait ValidatorTrait
             $validatorResult = $this->{'validate'.$ruleName}($input, $ruleValue);
 
             if ($validatorResult === false) {
-                $this->setFailMessage($param, $ruleName);
+                $this->setFailMessage($ruleKey, $ruleName);
                 return false;
             }
         };
