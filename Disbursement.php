@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Helpers\Flip;
+
 class Disbursement 
 {
     use Traits\ValidatorTrait;
@@ -45,5 +47,9 @@ class Disbursement
 
             return $this->run($reqParams);
         }
+
+        $flip = new Flip(app()->config);
+        $response = $flip->disbursement($reqParams);
+        echo $response;
     }
 }
