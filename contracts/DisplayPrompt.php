@@ -2,8 +2,12 @@
 
 namespace App\Contracts;
 
+use App\Traits\ValidatorTrait;
+
 abstract class DisplayPrompt
 {
+    use ValidatorTrait;
+
     public function run($reqParams = [])
     {
         if (! property_exists($this, 'parameters')) {

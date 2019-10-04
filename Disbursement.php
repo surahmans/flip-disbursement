@@ -7,8 +7,6 @@ use App\Contracts\DisplayPrompt;
 
 class Disbursement extends DisplayPrompt
 {
-    use Traits\ValidatorTrait;
-
     protected $rules = [
         'bank_code'      => 'string',
         'account_number' => 'numeric',
