@@ -3,7 +3,7 @@
 require_once  __DIR__ . '/../bootstrap/app.php';
 
 try {
-    $query = $app->conn->prepare("
+    $query = app()->conn->prepare("
         SET FOREIGN_KEY_CHECKS = 0;
         DROP TABLE IF EXISTS `disbursements`;
         CREATE TABLE `disbursements` (
