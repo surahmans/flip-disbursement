@@ -3,8 +3,9 @@
 namespace App;
 
 use App\Helpers\Flip;
+use App\Contracts\DisplayPrompt;
 
-class Disbursement 
+class Disbursement extends DisplayPrompt
 {
     use Traits\ValidatorTrait;
 
@@ -31,23 +32,8 @@ class Disbursement
         'remark'         => 'Berita penarikan: ',
     ];
 
-    public function run($reqParams = [])
+    public function processRequestParams(array $reqParams)
     {
-        foreach($this->parameters as $param => $prompts) {
-            if (array_key_exists($param, $reqParams)) continue;
-
-            $input = readline($prompts);
-
-            if ($this->isValidInput($param, $input)) {
-                $reqParams[$param] = $input;
-                continue;
-            }
-
-            echo $this->failMessage. PHP_EOL;
-
-            return $this->run($reqParams);
-        }
-
         $flip = new Flip(app()->config);
         $response = $flip->disbursement($reqParams);
         echo $response;
