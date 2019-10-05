@@ -10,6 +10,7 @@ try {
             `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             `bank_code` VARCHAR(25) NOT NULL,
             `account_number` VARCHAR(25) NOT NULL,
+            `amount` DECIMAL(10,0) UNSIGNED NOT NULL,
             `remark` VARCHAR(100) NOT NULL,
             `created_at` DATETIME NULL DEFAULT NOW(),
             PRIMARY KEY (`id`)
