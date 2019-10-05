@@ -42,7 +42,28 @@ class QueryBuilder
             $query = $this->pdo->prepare($sql);
             $query->execute([$value]);
 
-            return $query->fetch();
+            $result = $query->fetch();
+
+            return $result === false ? null : $result;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function update($table, $parameters, $column, $value)
+    {
+        $sql = sprintf(
+            'update %s set %s where %s = ?',
+            $table,
+            implode('=?, ', array_keys($parameters)) . '=? ',
+            $column
+        );
+
+        try {
+            $query = $this->pdo->prepare($sql);
+            $query->execute(array_merge(array_values($parameters), [$value]));
+
+            return $this->findBy($table, $column, $value);
         } catch (PDOException $e) {
             die($e->getMessage());
         }

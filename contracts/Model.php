@@ -27,6 +27,29 @@ abstract class Model
     }
 
     /**
+     * Fetch a row in database
+     *
+     * @param string $column
+     * @param mixed $value
+     * @return Model $static
+     */
+    public static function findBy(string $column, $value)
+    {
+        $static = new static;
+        $static->attributes = app()->db->findBy($static->table, $column, $value);
+
+        // Return null if the record not found
+        return is_null($static->attributes) ? null : $static;
+    }
+
+    public function update(array $attributes)
+    {
+        $this->attributes = app()->db->update($this->table, $attributes, 'id', $this->id);
+
+        return $this;
+    }
+
+    /**
      * Get attribute like accessing a property
      *
      * @param string $name

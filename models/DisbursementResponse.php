@@ -23,4 +23,19 @@ class DisbursementResponse extends Model
         'time_served',
         'fee'
     ];
+
+    public function markAsSuccess(array $response)
+    {
+        try {
+            $this->update([
+                'status'      => $response['status'],
+                'receipt'     => $response['receipt'],
+                'time_served' => $response['time_served']
+            ]);
+
+            echo sprintf('Selamat! Permintaan Anda berhasil diproses. Silahkan unduh bukti transaksinya di %s', $this->receipt) . PHP_EOL;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
