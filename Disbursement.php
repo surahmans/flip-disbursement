@@ -4,6 +4,7 @@ namespace App;
 
 use App\Helpers\Flip;
 use App\Models\Disbursement as DisbursementModel;
+use App\Models\DisbursementResponse;
 use App\Contracts\DisplayPrompt;
 
 class Disbursement extends DisplayPrompt
@@ -36,7 +37,23 @@ class Disbursement extends DisplayPrompt
     {
         $flip = new Flip(app()->config);
         $response = $flip->disbursement($reqParams);
+        $response = json_decode($response, true);
 
         $disbursement = DisbursementModel::create($reqParams);
+        $disbursementLog = DisbursementResponse::create(array_merge(
+            $response,
+            [
+                'transaction_id'  => $response['id'],
+                'disbursement_id' => $disbursement->id,
+                'time_served'     => $response['status'] === 'SUCCESS' ? $response['time_served'] : null
+            ]
+        ));
+
+        if ($response['status'] === 'SUCCESS') {
+            echo sprintf('Selamat! Permintaan Anda berhasil diproses. Silahkan unduh bukti transaksinya di %s', $disbursementLog->receipt) . PHP_EOL;
+            return;
+        }
+
+        echo sprintf('Status transaksi Anda "%s". Cek status tersebut menggunakan ID transaksi: %s', $disbursementLog->status, $disbursementLog->transaction_id) . PHP_EOL;
     }
 }
