@@ -20,6 +20,9 @@ class CheckStatus extends DisplayPrompt
         'transaction_id' => 'Nomor transaksi: ',
     ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function processRequestParams(array $reqParams)
     {
         $disbursementLog = DisbursementResponse::findBy('transaction_id', $reqParams['transaction_id']);

@@ -24,6 +24,12 @@ class DisbursementResponse extends Model
         'fee'
     ];
 
+    /**
+     * Mark disbursement log as success
+     *
+     * @param array $response
+     * @return void
+     */
     public function markAsSuccess(array $response)
     {
         try {

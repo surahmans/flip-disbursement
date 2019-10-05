@@ -34,6 +34,9 @@ class Disbursement extends DisplayPrompt
         'remark'         => 'Berita penarikan: ',
     ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function processRequestParams(array $reqParams)
     {
         $flip = new Flip(app()->config);

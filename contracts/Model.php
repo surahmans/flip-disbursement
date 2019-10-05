@@ -31,7 +31,7 @@ abstract class Model
      *
      * @param string $column
      * @param mixed $value
-     * @return Model $static
+     * @return Model|null $static
      */
     public static function findBy(string $column, $value)
     {
@@ -42,6 +42,12 @@ abstract class Model
         return is_null($static->attributes) ? null : $static;
     }
 
+    /**
+     * Update by given attributes
+     *
+     * @param array $attributes
+     * @return Model $this
+     */
     public function update(array $attributes)
     {
         $this->attributes = app()->db->update($this->table, $attributes, 'id', $this->id);
@@ -55,7 +61,7 @@ abstract class Model
      * @param string $name
      * @return mixed 
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         /**
          * Get the property instead if the property exist

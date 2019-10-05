@@ -3,7 +3,6 @@
 namespace App\Database;
 
 use PDOException;
-use ReflectionClass;
 
 class QueryBuilder
 {
@@ -14,7 +13,14 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
-    public function insert($table, $parameters)
+    /**
+     * Insert into database
+     *
+     * @param string $table
+     * @param array $parameters
+     * @return array
+     */
+    public function insert(string $table, array $parameters)
     {
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
@@ -34,7 +40,15 @@ class QueryBuilder
         }
     }
 
-    public function findBy($table, $column, $value)
+    /**
+     * Find single record in database
+     *
+     * @param string $table
+     * @param string $column
+     * @param string|int $value
+     * @return array|null Return null if not found 
+     */
+    public function findBy(string $table, string $column, $value)
     {
         $sql = sprintf('select * from %s where %s = ?', $table, $column);
 
@@ -50,7 +64,16 @@ class QueryBuilder
         }
     }
 
-    public function update($table, $parameters, $column, $value)
+    /**
+     * Update single record in database
+     *
+     * @param string $table
+     * @param array $parameters
+     * @param string $column
+     * @param string|int $value
+     * @return array|null Return updated data if record is exist. Instead, return null
+     */
+    public function update(string $table, array $parameters, string $column, $value)
     {
         $sql = sprintf(
             'update %s set %s where %s = ?',

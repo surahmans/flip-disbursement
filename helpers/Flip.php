@@ -13,16 +13,35 @@ class Flip
         $this->config = $config;
     }
 
+    /**
+     * Handler to disbursement
+     *
+     * @param array $data
+     * @return json JSON response
+     */
     public function disbursement(array $data)
     {
         return $this->post('/disburse', $data);
     }
 
+    /**
+     * Handler to check status by given transaction id
+     *
+     * @param string $transactionId We use string to handle hash transaction id
+     * @return json JSON response
+     */
     public function checkStatus(string $transactionId)
     {
         return $this->get('/disburse/'.$transactionId);
     }
 
+    /**
+     * Handler to curl post
+     *
+     * @param string $endpoint
+     * @param array $data
+     * @return json JSON response
+     */
     private function post(string $endpoint, array $data = [])
     {
         return $this->send($endpoint, [
@@ -31,6 +50,13 @@ class Flip
         ]);
     }
 
+    /**
+     * Handler to curl get
+     *
+     * @param string $endpoint
+     * @param array $data 
+     * @return json JSON response
+     */
     private function get(string $endpoint, array $data = [])
     {
         return $this->send($endpoint, [
@@ -38,6 +64,13 @@ class Flip
         ]);
     }
 
+    /**
+     * Wrapper to perform curl action
+     *
+     * @param string $endpoint
+     * @param array $options
+     * @return json $response
+     */
     private function send(string $endpoint, array $options)
     {
         $ch = curl_init();

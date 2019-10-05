@@ -8,6 +8,12 @@ abstract class DisplayPrompt
 {
     use ValidatorTrait;
 
+    /**
+     * Perform interactive prompt based on parameters property
+     *
+     * @param array $reqParams
+     * @return void
+     */
     public function run($reqParams = [])
     {
         if (! property_exists($this, 'parameters')) {
@@ -36,5 +42,11 @@ abstract class DisplayPrompt
         return $this->processRequestParams($reqParams);
     }
 
+    /**
+     * Process request parameters after all inputted
+     *
+     * @param array $reqParams
+     * @return void
+     */
     abstract public function processRequestParams(array $reqParams);
 }

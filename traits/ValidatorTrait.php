@@ -55,7 +55,7 @@ trait ValidatorTrait
      * @param string $rule
      * @return string 
      */
-    private function getRuleName($rule)
+    private function getRuleName(string $rule)
     {
         $length = strpos($rule, ':');
 
@@ -69,7 +69,7 @@ trait ValidatorTrait
      * @param string $rule
      * @return string 
      */
-    private function getRuleValue($rule)
+    private function getRuleValue(string $rule)
     {
         $length = strpos($rule, ':');
 
@@ -98,27 +98,61 @@ trait ValidatorTrait
         $this->failMessage = $this->ruleMessages[$key];
     }
 
+    /**
+     * Validation to ensure a string (Alphabet) with no numbers
+     *
+     * @param string $input
+     * @return boolean
+     */
     private function validateString($input)
     { 
         return preg_match('/^([a-zA-Z\s]+)(?!([0-9]))$/', $input, $matches) > 0;
     }
 
+    /**
+     * Validation to ensure a numeric
+     *
+     * @param string $input
+     * @return boolean
+     */
     private function validateNumeric($input)
     {
         return preg_match('/^[0-9]+$/', $input, $matches) > 0;
     }
 
-    private function validateMin($input, $min)
+    /**
+     * Validation to check input not less than minimum value
+     *
+     * @param string $input
+     * @param array|string $min
+     * @return boolean
+     */
+    private function validateMin(string $input, $min)
     {
         return $this->compareMinMax($input, $min, '>=');
     }
 
-    private function validateMax($input, $min)
+    /**
+     * Validation to check input not greater than maximum value
+     *
+     * @param string $input
+     * @param array|string $max
+     * @return boolean
+     */
+    private function validateMax(string $input, $max)
     {
-        return $this->compareMinMax($input, $min, '<=');
+        return $this->compareMinMax($input, $max, '<=');
     }
 
-    private function compareMinMax($input, $value, $operator)
+    /**
+     * Compare input with standard value based on operator
+     *
+     * @param string $input
+     * @param array|string $value
+     * @param string $operator
+     * @return boolan
+     */
+    private function compareMinMax(string $input, $value, string $operator)
     {
         /**
          * For numeric, just compare it
@@ -143,7 +177,14 @@ trait ValidatorTrait
         return $compareResult;
     }
 
-    private function validateList($input, $value)
+    /**
+     * Validation to ensure input is in a list
+     *
+     * @param string $input
+     * @param string $value
+     * @return boolean
+     */
+    private function validateList(string $input, string $value)
     {
         $list = explode(',', $value);
 

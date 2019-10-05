@@ -8,6 +8,12 @@ use App\Helpers\Config;
 
 class Connection
 {
+    /**
+     * Make a connection
+     *
+     * @param Config $config
+     * @return PDO
+     */
     public static function make(Config $config)
     {
         try {

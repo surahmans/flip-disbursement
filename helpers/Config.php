@@ -19,10 +19,9 @@ class Config
      * Get config like accessing a property
      *
      * @param string $name
-     *
      * @return mixed 
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         /**
          * Get the property instead of config key if the property exist
@@ -48,11 +47,21 @@ class Config
         return $value;
     }
 
+    /**
+     * Get config from config file
+     *
+     * @return array 
+     */
     private function getConfig()
     {
         return json_decode($this->getConfigFile(), true);
     }
 
+    /**
+     * Get config file content
+     *
+     * @return string 
+     */
     private function getConfigFile()
     {
         $filename = __DIR__ . '/../config.json';
