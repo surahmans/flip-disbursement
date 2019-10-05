@@ -10,7 +10,7 @@ use App\Contracts\DisplayPrompt;
 class Disbursement extends DisplayPrompt
 {
     protected $rules = [
-        'bank_code'      => 'string',
+        'bank_code'      => 'string|list:mandiri,bni,bri,bca,bsm,cimb,muamalat',
         'account_number' => 'numeric',
         'amount'         => 'numeric|min:10000|max:1000000000',
         'remark'         => 'string|max:20'
@@ -18,6 +18,7 @@ class Disbursement extends DisplayPrompt
 
     protected $ruleMessages = [
         'bank_code.string'       => 'Karakter yang diperbolehkan hanya berupa huruf',
+        'bank_code.list'         => 'Maaf. Pilihan yang tersedia saat ini hanya mandiri, bni, bri, bca, bsm, cimb, muamalat',
         'account_number.numeric' => 'Nomor rekening tujuan hanya boleh mengandung angka',
         'amount.numeric'         => 'Nominal harus berupa angka',
         'amount.min'             => 'Minimal penarikan adalah 10000',

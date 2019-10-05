@@ -142,4 +142,11 @@ trait ValidatorTrait
         eval('$compareResult = '. strlen($input) . $operator . $value . ';');
         return $compareResult;
     }
+
+    private function validateList($input, $value)
+    {
+        $list = explode(',', $value);
+
+        return in_array($input, $list);
+    }
 }
