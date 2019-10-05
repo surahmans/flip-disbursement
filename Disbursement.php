@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Helpers\Flip;
+use App\Models\Disbursement as DisbursementModel;
 use App\Contracts\DisplayPrompt;
 
 class Disbursement extends DisplayPrompt
@@ -35,6 +36,7 @@ class Disbursement extends DisplayPrompt
     {
         $flip = new Flip(app()->config);
         $response = $flip->disbursement($reqParams);
-        echo $response;
+
+        $disbursement = DisbursementModel::create($reqParams);
     }
 }
