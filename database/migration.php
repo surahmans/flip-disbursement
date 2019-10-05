@@ -21,6 +21,7 @@ try {
         CREATE TABLE `disbursement_responses` (
             `id` BIGINT NOT NULL AUTO_INCREMENT,
             `disbursement_id` BIGINT UNSIGNED NOT NULL,
+            `status` VARCHAR(25) NOT NULL,
             `transaction_id` BIGINT UNSIGNED NOT NULL,
             `amount` DECIMAL(10,0) UNSIGNED NOT NULL,
             `timestamp` DATETIME NOT NULL,
